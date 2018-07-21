@@ -1,7 +1,18 @@
+/*------------------------------------------------------------------------------
+
+This source is part of the assignment of the PADC Fun5 class.
+
+Modification History
+
+
+Date		Version		Author			Description
+----------	-----------	--------------- ----------------------------------------
+30 06 2018	1.0			Nwe Ni Aung		Initial Version.
+------------------------------------------------------------------------------*/
 package com.padcmyannmar.ck.components;
-
+//------------------------------------------------------------------------------
 import android.support.v7.widget.RecyclerView;
-
+//------------------------------------------------------------------------------
 public class SmartScrollListener extends RecyclerView.OnScrollListener {
 
     @Override
@@ -14,4 +25,11 @@ public class SmartScrollListener extends RecyclerView.OnScrollListener {
         super.onScrollStateChanged(recyclerView, newState);
     }
 
+//------------------------------------------------------------------------------
+
 }
+//------------------------------------------------------------------------------
+//
+//		End Of File
+//
+//------------------------------------------------------------------------------

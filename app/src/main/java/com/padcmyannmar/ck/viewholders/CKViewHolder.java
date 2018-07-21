@@ -16,30 +16,24 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.padcmyannmar.ck.R;
 import com.padcmyannmar.ck.data.vos.NewProductsVO;
 import com.padcmyannmar.ck.delegates.CKDelegate;
-import com.padcmyannmar.ck.utils.CKGlideApp;
 import com.padcmyannmar.ck.utils.GlideApp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 //------------------------------------------------------------------------------
 public class CKViewHolder extends RecyclerView.ViewHolder {
-    /*3rd step of controller pattern*/
-    private CKDelegate mCkDelegate;
-
-    private NewProductsVO mNewProducts;
-
     //productImage
     @BindView(R.id.iv_ck_shoes)
     public ImageView ivProductImage;
-
     //productTitle
     @BindView(R.id.tv_title)
     public TextView tvTitle;
+    /*3rd step of controller pattern*/
+    private CKDelegate mCkDelegate;
+    private NewProductsVO mNewProducts;
 
     /* relay to activity */
     public CKViewHolder(View itemView, CKDelegate ckDelegate) {
@@ -69,7 +63,7 @@ public class CKViewHolder extends RecyclerView.ViewHolder {
                     .placeholder(R.drawable.img_placeholder)
                     .error(R.drawable.img_errorstop)
                     .into(ivProductImage);
-        }else {
+        } else {
             //hide null image place
             ivProductImage.setVisibility(View.GONE);
         }

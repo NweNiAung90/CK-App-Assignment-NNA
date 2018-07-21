@@ -15,7 +15,6 @@ import com.google.gson.annotations.SerializedName;
 import com.padcmyannmar.ck.data.vos.NewProductsVO;
 
 import java.util.List;
-
 //------------------------------------------------------------------------------
 /*
  This VOs component the response json objects to save with object format for Charles & Keith App.

@@ -1,5 +1,16 @@
-package com.padcmyannmar.ck.network;
+/*------------------------------------------------------------------------------
 
+This source is part of the assignment of the PADC Fun5 class.
+
+Modification History
+
+
+Date		Version		Author			Description
+----------	-----------	--------------- ----------------------------------------
+30 06 2018	1.0			Nwe Ni Aung		Initial Version.
+------------------------------------------------------------------------------*/
+package com.padcmyannmar.ck.network;
+//------------------------------------------------------------------------------
 import com.padcmyannmar.ck.events.ApiErrorEvent;
 import com.padcmyannmar.ck.events.SuccessForceRefreshGetNewProductEvent;
 import com.padcmyannmar.ck.events.SuccessGetNewProductsEvent;
@@ -11,13 +22,12 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+//------------------------------------------------------------------------------
 
 public class RetrofitDataAgentImpl implements CKDataAgent {
     private static RetrofitDataAgentImpl sObjInstance;
@@ -52,17 +62,17 @@ public class RetrofitDataAgentImpl implements CKDataAgent {
         /*Factory Logic
          * only one obj for this class type
          */
-        if(sObjInstance == null){
+        if (sObjInstance == null) {
             sObjInstance = new RetrofitDataAgentImpl();
         }
         return sObjInstance;
     }
 
     @Override
-    public void loadProductsList(String accessToken, int page,final boolean isForceRefresh) {
+    public void loadProductsList(String accessToken, int page, final boolean isForceRefresh) {
         /* call Interface Type method with param and get Call object
            Pass GetNewProductsResponse type as Call Object Generic Type */
-        Call<GetNewProductsResponse> loadNewProductsCall = mTheApi.loadCKList(accessToken,page);
+        Call<GetNewProductsResponse> loadNewProductsCall = mTheApi.loadCKList(accessToken, page);
         // pass Callback Interface as Anonymous Inner Class
         loadNewProductsCall.enqueue(new Callback<GetNewProductsResponse>() {
             @Override
@@ -70,20 +80,20 @@ public class RetrofitDataAgentImpl implements CKDataAgent {
                 //Retrieve Response Body
                 GetNewProductsResponse newProductsResponse = response.body();
                 //Response is ok.
-                if(newProductsResponse != null && newProductsResponse.isResponseOK()){
-                    if(isForceRefresh){
+                if (newProductsResponse != null && newProductsResponse.isResponseOK()) {
+                    if (isForceRefresh) {
                         SuccessForceRefreshGetNewProductEvent event = new SuccessForceRefreshGetNewProductEvent(newProductsResponse.getNewProducts());
                         EventBus.getDefault().post(event);
-                    }else {
-                     SuccessGetNewProductsEvent event = new SuccessGetNewProductsEvent(newProductsResponse.getNewProducts());
-                    EventBus.getDefault().post(event);
+                    } else {
+                        SuccessGetNewProductsEvent event = new SuccessGetNewProductsEvent(newProductsResponse.getNewProducts());
+                        EventBus.getDefault().post(event);
                     }
-                }else { //Response is not ok. Error Case. Response Null Case
-                    if(newProductsResponse == null){
+                } else { //Response is not ok. Error Case. Response Null Case
+                    if (newProductsResponse == null) {
                         //For 200OK
                         ApiErrorEvent event = new ApiErrorEvent("Empty response in network call.");
                         EventBus.getDefault().post(event);
-                    }else {
+                    } else {
                         //shows server message
                         ApiErrorEvent event = new ApiErrorEvent(newProductsResponse.getMessage());
                         EventBus.getDefault().post(event);
@@ -98,8 +108,6 @@ public class RetrofitDataAgentImpl implements CKDataAgent {
                 EventBus.getDefault().post(event);
             }
         });
-
-
 
 
     }

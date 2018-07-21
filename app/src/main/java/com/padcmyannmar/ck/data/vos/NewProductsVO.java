@@ -11,7 +11,9 @@ Date		Version		Author			Description
 ------------------------------------------------------------------------------*/
 package com.padcmyannmar.ck.data.vos;
 //------------------------------------------------------------------------------
+
 import com.google.gson.annotations.SerializedName;
+
 //------------------------------------------------------------------------------
 /*
  This VOs component the response json objects to save with object format for CK App.

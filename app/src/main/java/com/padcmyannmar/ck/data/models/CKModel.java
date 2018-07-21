@@ -1,5 +1,16 @@
-package com.padcmyannmar.ck.data.models;
+/*------------------------------------------------------------------------------
 
+This source is part of the assignment of the PADC Fun5 class.
+
+Modification History
+
+
+Date		Version		Author			Description
+----------	-----------	--------------- ----------------------------------------
+30 06 2018	1.0			Nwe Ni Aung		Initial Version.
+------------------------------------------------------------------------------*/
+package com.padcmyannmar.ck.data.models;
+//------------------------------------------------------------------------------
 import com.padcmyannmar.ck.data.vos.NewProductsVO;
 import com.padcmyannmar.ck.events.SuccessForceRefreshGetNewProductEvent;
 import com.padcmyannmar.ck.events.SuccessGetNewProductsEvent;
@@ -13,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//------------------------------------------------------------------------------
 public class CKModel {
 
     private static final String DUMMY_ACCESS_TOKEN = "b002c7e1a528b7cb460933fc2875e916";
@@ -67,11 +78,11 @@ public class CKModel {
 
     }
 
-    public void forcedRefreshNewProductList(){
+    public void forcedRefreshNewProductList() {
         //for mPage++ issue ,set page 1 for don't miss pages
         mPage = 1;
         //for pull to refresh check news data comes or not
-        mDataAgent.loadProductsList(DUMMY_ACCESS_TOKEN, 1,true);
+        mDataAgent.loadProductsList(DUMMY_ACCESS_TOKEN, 1, true);
 
     }
 
@@ -79,8 +90,8 @@ public class CKModel {
      Retrieve data from data Repository
    */
     public NewProductsVO getProductById(Integer productId) {
-        return null; //TODO remove this after testing empty view layout in news details screen.
-        //return mNewProductsMap.get(productId);
+        //return null; //TODO remove this after testing empty view layout in news details screen.
+        return mNewProductsMap.get(productId);
     }
 
     //composite
@@ -96,12 +107,12 @@ public class CKModel {
 
     //composite
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void onSuccessForceRefreshGetNewProducts(SuccessForceRefreshGetNewProductEvent event){
+    public void onSuccessForceRefreshGetNewProducts(SuccessForceRefreshGetNewProductEvent event) {
         setDataIntoRepository(event.getProductsList());
     }
 
     //helper method
-    private void setDataIntoRepository( List<NewProductsVO> productsList){
+    private void setDataIntoRepository(List<NewProductsVO> productsList) {
         for (NewProductsVO newProducts : productsList) {
             mNewProductsMap.put(newProducts.getProductId(), newProducts);
         }

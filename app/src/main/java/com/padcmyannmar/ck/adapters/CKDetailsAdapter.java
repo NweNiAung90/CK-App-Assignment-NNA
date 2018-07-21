@@ -1,5 +1,16 @@
-package com.padcmyannmar.ck.adapters;
+/*------------------------------------------------------------------------------
 
+This source is part of the assignment of the PADC Fun5 class.
+
+Modification History
+
+
+Date		Version		Author			Description
+----------	-----------	--------------- ----------------------------------------
+30 06 2018	1.0			Nwe Ni Aung		Initial Version.
+------------------------------------------------------------------------------*/
+package com.padcmyannmar.ck.adapters;
+//------------------------------------------------------------------------------
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,13 +19,13 @@ import android.view.ViewGroup;
 
 import com.padcmyannmar.ck.R;
 import com.padcmyannmar.ck.viewholders.CKDetailsViewHolder;
-
+//------------------------------------------------------------------------------
 public class CKDetailsAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public CKDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.view_holder_ck_details,parent,false);
+        View view = layoutInflater.inflate(R.layout.view_holder_ck_details, parent, false);
         return new CKDetailsViewHolder(view);
     }
 
@@ -30,4 +41,11 @@ public class CKDetailsAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return 3;
     }
+//--------------------------------------------------------------------------
+
 }
+//------------------------------------------------------------------------------
+//
+//		End Of File
+//
+//------------------------------------------------------------------------------

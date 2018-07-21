@@ -60,6 +60,7 @@ public class CKAdapter extends RecyclerView.Adapter<CKViewHolder> {
         return mProductsList.size();
     }
 
+    //insert()
     public void setmProductsList(List<NewProductsVO> mProductsList) {
         this.mProductsList = mProductsList;
         //refresh all itemViews

@@ -2,7 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_medium_2"
     android:layout_marginBottom="@dimen/margin_medium_2">
@@ -10,26 +10,26 @@
     <ImageView
         android:id="@+id/iv_ck_shoes"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        tools:src="@drawable/ck_shoe"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:layout_margin="@dimen/margin_medium"/>
+        tools:src="@drawable/ck_shoe" />
 
     <TextView
         android:id="@+id/tv_new"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/iv_ck_shoes"
-        android:paddingRight="@dimen/margin_medium_2"
-        android:paddingLeft="@dimen/margin_medium_2"
         android:layout_marginLeft="@dimen/margin_medium_2"
         android:layout_marginRight="@dimen/margin_medium_2"
         android:layout_marginTop="@dimen/margin_medium_2"
         android:background="@color/white"
+        android:paddingLeft="@dimen/margin_medium_2"
+        android:paddingRight="@dimen/margin_medium_2"
         android:text="NEW"
         android:textColor="@color/primary_dark"
         android:textSize="@dimen/text_regular_2x" />
-
 
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_below="@+id/iv_ck_shoes"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_medium"
-        tools:text="POINTED HIGH HEELS"
         android:textColor="@color/primary_dark"
-        android:textSize="@dimen/text_regular_2x" />
+        android:textSize="@dimen/text_regular_2x"
+        tools:text="POINTED HIGH HEELS" />
 </RelativeLayout>

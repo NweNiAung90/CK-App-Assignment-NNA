@@ -11,6 +11,7 @@ Date		Version		Author			Description
 ------------------------------------------------------------------------------*/
 package com.padcmyannmar.ck.activities;
 //------------------------------------------------------------------------------
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,7 +45,7 @@ import butterknife.ButterKnife;
 //------------------------------------------------------------------------------
 
 /*2nd step of Controller Pattern */
-public class ItemsListActivity extends BaseActivity implements CKDelegate{
+public class ItemsListActivity extends BaseActivity implements CKDelegate {
     CKAdapter mCKAdapter;
 
     @BindView(R.id.vp_empty)
@@ -75,7 +76,7 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
         //Bind Obj to UI Component
         ButterKnife.bind(this, this);
 
-        Toolbar toolbar =findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mCKAdapter = new CKAdapter(this);
@@ -85,16 +86,17 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
         //Load More Data and calculate user scroll reach end of the list
         rvItems.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private boolean isListEndReached = false;
+
             @Override
             //This method is called when user start scroll and state change
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                Log.d("","addOnScrollListener:onScrollStateChanged " + newState);
+                Log.d("", "addOnScrollListener:onScrollStateChanged " + newState);
 
-                if(newState == RecyclerView.SCROLL_STATE_IDLE &&
-                        ( (LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition()
+                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
+                        ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition()
                                 == recyclerView.getAdapter().getItemCount() - 1
-                        && !isListEndReached){
+                        && !isListEndReached) {
                     isListEndReached = true;
                     CKModel.getObjInstance().loadProductsList();
                 }
@@ -105,14 +107,14 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
             //This method is called during scrolling
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.d("", "OnScrollListener:onScrolled -dx:"+ dx + "dy: " + dy);
+                Log.d("", "OnScrollListener:onScrolled -dx:" + dx + "dy: " + dy);
 
                 int visibleItemCount = recyclerView.getLayoutManager().getChildCount();
                 int totalItemCount = recyclerView.getLayoutManager().getItemCount();
                 int pastVisibleItems = ((LinearLayoutManager) rvItems.getLayoutManager())
                         .findFirstCompletelyVisibleItemPosition();
 
-                if(visibleItemCount + pastVisibleItems < totalItemCount){
+                if (visibleItemCount + pastVisibleItems < totalItemCount) {
                     isListEndReached = false;
                 }
 
@@ -141,7 +143,7 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
             }
         });
 
-        //TODO  NewsModel.getObjInstance().forcedRefreshNewsList();
+        CKModel.getObjInstance().forcedRefreshNewProductList();
 
         //show loading jatster but never disappear this loading jaster
         swipeRefreshLayout.setRefreshing(true);
@@ -163,7 +165,7 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
     @Override
     protected void onStop() {
         super.onStop();
-        if(EventBus.getDefault().isRegistered(this)) {
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
     }
@@ -172,7 +174,7 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
     @Override
     protected void onStart() {
         super.onStart();
-        if(!EventBus.getDefault().isRegistered(this)) {
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
     }
@@ -180,15 +182,15 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
     /*2nd step of Controller Pattern */
     @Override
     public void onTapItemView(NewProductsVO newProducts) {
-        Intent intent = new Intent(getApplicationContext(),ItemsDetailsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ItemsDetailsActivity.class);
         //add id to intent
-        intent.putExtra(CKConstants.PRODUCT_ID,newProducts.getProductId());
+        intent.putExtra(CKConstants.PRODUCT_ID, newProducts.getProductId());
         startActivity(intent);
     }
 
     /* 2n Step Event Bus Listen Method */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSuccessGetNewProducts(SuccessGetNewProductsEvent event){
+    public void onSuccessGetNewProducts(SuccessGetNewProductsEvent event) {
         Log.d("onSuccessGetNewProducts", "onSuccessGetNewProducts :" + event.getProductsList());
         // pass data to Adapter.
         mCKAdapter.appendProductsList(event.getProductsList());
@@ -199,7 +201,7 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onSuccessForceRefreshGetNewProducts(SuccessForceRefreshGetNewProductEvent event){
+    public void onSuccessForceRefreshGetNewProducts(SuccessForceRefreshGetNewProductEvent event) {
         mCKAdapter.setmProductsList(event.getProductsList());
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -212,12 +214,12 @@ public class ItemsListActivity extends BaseActivity implements CKDelegate{
         //solve bad experience while loading fail
         //Show Empty View
         vpEmpty.setVisibility(View.VISIBLE);
-        Snackbar.make(swipeRefreshLayout,event.getErrorMsg(),Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(swipeRefreshLayout, event.getErrorMsg(), Snackbar.LENGTH_INDEFINITE).show();
 
-        if(mCKAdapter.getItemCount()<0){
+        if (mCKAdapter.getItemCount() < 0) {
             vpEmpty.setVisibility(View.VISIBLE);
-        }else {
-            vpEmpty.setVisibility(View.GONE);
+        } else {
+            //vpEmpty.setVisibility(View.GONE);
 
         }
     }

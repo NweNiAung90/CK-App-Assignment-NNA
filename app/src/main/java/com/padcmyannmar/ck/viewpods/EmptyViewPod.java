@@ -1,4 +1,16 @@
+/*------------------------------------------------------------------------------
+
+This source is part of the assignment of the PADC Fun5 class.
+
+Modification History
+
+
+Date		Version		Author			Description
+----------	-----------	--------------- ----------------------------------------
+07 07 2018	1.0			Nwe Ni Aung		Initial Version.
+------------------------------------------------------------------------------*/
 package com.padcmyannmar.ck.viewpods;
+//------------------------------------------------------------------------------
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,7 +23,8 @@ import com.padcmyannmar.ck.utils.GlideApp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+//------------------------------------------------------------------------------
+/*Composite Custom View */
 public class EmptyViewPod extends RelativeLayout {
     @BindView(R.id.iv_empty)
     ImageView ivEmpty;
@@ -35,10 +48,11 @@ public class EmptyViewPod extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        ButterKnife.bind(this,this);
+        ButterKnife.bind(this, this);
     }
 
-    public void setEmptyData(String emptyImageUrl, String emptyMsg){
+    //Composite Custom View
+    public void setEmptyData(String emptyImageUrl, String emptyMsg) {
         //directly use getContext() for Composite View Image
         GlideApp.with(getContext())
                 .load(emptyImageUrl)
@@ -48,10 +62,18 @@ public class EmptyViewPod extends RelativeLayout {
     }
 
     /*method override
-      resource type is default int type */
-    public void setEmptyData(int emptyImageResource , String emptyMsg){
+      resource type is default int type
+      Composite Custom View*/
+    public void setEmptyData(int emptyImageResource, String emptyMsg) {
         ivEmpty.setImageResource(emptyImageResource);
         tvEmpty.setText(emptyMsg);
 
     }
+//--------------------------------------------------------------------------
+
 }
+//------------------------------------------------------------------------------
+//
+//		End Of File
+//
+//------------------------------------------------------------------------------

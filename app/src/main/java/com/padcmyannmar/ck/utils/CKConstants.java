@@ -10,7 +10,6 @@ Date		Version		Author			Description
 06 07 2018	1.0			Nwe Ni Aung		Initial Version.
 ------------------------------------------------------------------------------*/
 package com.padcmyannmar.ck.utils;
-
 //------------------------------------------------------------------------------
 public class CKConstants {
     /*
